@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NonogramNet.Lib.Model
 {
-    enum CellState
+    public enum CellState
     {
         None,
         Filled,
