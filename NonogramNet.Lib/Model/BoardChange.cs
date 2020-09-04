@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NonogramNet.Lib.Model
 {
-    struct BoardChange
+    public struct BoardChange
     {
         public int X { get; private set; }
         public int Y { get; private set; }

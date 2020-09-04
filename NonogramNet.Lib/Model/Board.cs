@@ -59,23 +59,39 @@ namespace NonogramNet.Lib.Model
                 throw new ArgumentException($"The number of LeftRules doesn't match the dimension of the matrix. LeftRules: {leftRules.NumberOfRules} <> Matrix: {matrix.GetLength(0)}");
             }
 
-            CellState[,] newMatrix = new CellState[topRules.NumberOfRules, leftRules.NumberOfRules];
-            for (int y = 0; y < matrix.GetLength(1); y++)
-            {
-                for (int x = 0; x < matrix.GetLength(0); x++)
-                {
-                    newMatrix[x, y] = matrix[x, y];
-                }
-            }
+            CellState[,] newMatrix = CloneMatrix(matrix);
 
             return new Board(topRules, leftRules, newMatrix);
         }
 
         public CellState this[int x, int y] => this.matrix[x, y];
 
-        //public Board ApplyChange(BoardChange change)
-        //{
+        public Board ApplyChange(BoardChange change)
+        {
+            // Check if no change is about to happen. In that case just return the same board since it is immutable.
+            if (this.matrix[change.X, change.Y] == change.NewValue)
+            {
+                return this;
+            }
 
-        //}
+            var newMatrix = CloneMatrix(this.matrix);
+            newMatrix[change.X, change.Y] = change.NewValue;
+
+            return new Board(this.TopRules, this.LeftRules, newMatrix);
+        }
+
+        private static CellState[,] CloneMatrix(CellState[,] oldMatrix)
+        {
+            CellState[,] newMatrix = new CellState[oldMatrix.GetLength(0), oldMatrix.GetLength(0)];
+            for (int y = 0; y < oldMatrix.GetLength(1); y++)
+            {
+                for (int x = 0; x < oldMatrix.GetLength(0); x++)
+                {
+                    newMatrix[x, y] = oldMatrix[x, y];
+                }
+            }
+
+            return newMatrix;
+        }
     }
 }
