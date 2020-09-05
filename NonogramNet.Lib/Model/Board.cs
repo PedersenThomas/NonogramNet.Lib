@@ -12,12 +12,13 @@ namespace NonogramNet.Lib.Model
 
         private CellState[,] matrix { get; }
 
-        public Board(RulesMatrix topRules, RulesMatrix leftRules)
+        private Board(RulesMatrix topRules, RulesMatrix leftRules)
         {
             this.TopRules = topRules;
             this.LeftRules = leftRules;
             matrix = new CellState[topRules.NumberOfRules, leftRules.NumberOfRules];
         }
+
         private Board(RulesMatrix topRules, RulesMatrix leftRules, CellState[,] matrix)
         {
             this.TopRules = topRules;
@@ -78,6 +79,36 @@ namespace NonogramNet.Lib.Model
             newMatrix[change.X, change.Y] = change.NewValue;
 
             return new Board(this.TopRules, this.LeftRules, newMatrix);
+        }
+
+        public Board ApplyChanges(IEnumerable<BoardChange> changes)
+        {
+            var newMatrix = this.matrix;
+            bool isCloned = false;
+            foreach (var change in changes)
+            {
+                if (newMatrix[change.X, change.Y] == change.NewValue)
+                {
+                    continue;
+                }
+
+                if (!isCloned)
+                {
+                    newMatrix = CloneMatrix(this.matrix);
+                    isCloned = true;
+                }
+
+                newMatrix[change.X, change.Y] = change.NewValue;
+            }
+
+            if (isCloned)
+            {
+                return new Board(this.TopRules, this.LeftRules, newMatrix);
+            }
+            else
+            {
+                return this;
+            }
         }
 
         private static CellState[,] CloneMatrix(CellState[,] oldMatrix)
