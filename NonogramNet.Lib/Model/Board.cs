@@ -101,14 +101,7 @@ namespace NonogramNet.Lib.Model
                 newMatrix[change.X, change.Y] = change.NewValue;
             }
 
-            if (isCloned)
-            {
-                return new Board(this.TopRules, this.LeftRules, newMatrix);
-            }
-            else
-            {
-                return this;
-            }
+            return isCloned ? new Board(this.TopRules, this.LeftRules, newMatrix) : this;
         }
 
         private static CellState[,] CloneMatrix(CellState[,] oldMatrix)
