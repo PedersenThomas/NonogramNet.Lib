@@ -10,6 +10,10 @@ namespace NonogramNet.Lib.Model
 
         public RulesMatrix LeftRules { get; }
 
+        public int Width => this.matrix.GetLength(0);
+
+        public int Height => this.matrix.GetLength(1);
+
         private CellState[,] matrix { get; }
 
         private Board(RulesMatrix topRules, RulesMatrix leftRules)
@@ -82,6 +86,28 @@ namespace NonogramNet.Lib.Model
         }
 
         public Board ApplyChanges(IEnumerable<BoardChange> changes)
+        {
+            var newMatrix = this.matrix;
+            bool isCloned = false;
+            foreach (var change in changes)
+            {
+                if (newMatrix[change.X, change.Y] == change.NewValue)
+                {
+                    continue;
+                }
+
+                if (!isCloned)
+                {
+                    newMatrix = CloneMatrix(this.matrix);
+                    isCloned = true;
+                }
+
+                newMatrix[change.X, change.Y] = change.NewValue;
+            }
+
+            return isCloned ? new Board(this.TopRules, this.LeftRules, newMatrix) : this;
+        }
+        public Board ApplyChanges(params BoardChange[] changes)
         {
             var newMatrix = this.matrix;
             bool isCloned = false;
