@@ -9,6 +9,20 @@ namespace NonogramNet.Lib.Test
     public class BoardChanges
     {
         [Fact]
+        public void SemanticEquals()
+        {
+            var a = new BoardChange(6,3,CellState.Filled);
+            var b = new BoardChange(6, 3, CellState.Filled);
+            Assert.True(a.Equals(b));
+            Assert.Equal(a.GetHashCode(), b.GetHashCode());
+
+
+            var c = new BoardChange(3, 6, CellState.Filled);
+            Assert.False(a.Equals(c));
+            Assert.NotEqual(a.GetHashCode(), c.GetHashCode());
+        }
+
+        [Fact]
         public void DefaultChange()
         {
             var startBoard = BoardSamples.Board1;
