@@ -21,6 +21,10 @@ namespace NonogramNet.Lib
                     lastState = current;
                     count = 1;
                 }
+                else
+                {
+                    count += 1;
+                }
             }
             result.Add((lastState, count));
 
@@ -40,6 +44,10 @@ namespace NonogramNet.Lib
                     result.Add((lastState, count));
                     lastState = current;
                     count = 1;
+                }
+                else
+                {
+                    count += 1;
                 }
             }
             result.Add((lastState, count));

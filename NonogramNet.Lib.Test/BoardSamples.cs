@@ -26,7 +26,8 @@ namespace NonogramNet.Lib.Test
                 new List<int> {3, 1},
                 new List<int> {2, 2},
                 new List<int> {1, 1, 1},
-                new List<int> {1, 1}
+                new List<int> {1, 1},
+                new List<int>()
             })
         );
 

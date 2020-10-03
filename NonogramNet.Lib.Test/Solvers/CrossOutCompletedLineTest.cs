@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using NonogramNet.Lib.Model;
 using NonogramNet.Lib.Solvers;
 using Xunit;
@@ -16,8 +13,8 @@ namespace NonogramNet.Lib.Test.Solvers
             var board = BoardSamples.Board2;
             var solver = new CrossOutCompletedLine();
 
-            var actualChanes = solver.Solve(board);
-            Assert.Empty(actualChanes);
+            var actualChanges = solver.Solve(board);
+            Assert.Empty(actualChanges);
         }
 
         [Fact]
@@ -27,15 +24,14 @@ namespace NonogramNet.Lib.Test.Solvers
                 .ApplyChange(new BoardChange(0, 2, CellState.Filled));
             var solver = new CrossOutCompletedLine();
 
-            var actualChanes = solver.Solve(board);
-            Assert.Equal(2, actualChanes.Count());
+            var actualChanges = solver.Solve(board);
 
             var expected = new List<BoardChange>
             {
                 new BoardChange(0,0,CellState.Blocked),
                 new BoardChange(0,1,CellState.Blocked)
             };
-            Assert.Equal(expected, actualChanes);
+            Assert.Equal(expected, actualChanges);
         }
 
         [Fact]
@@ -45,15 +41,14 @@ namespace NonogramNet.Lib.Test.Solvers
                 .ApplyChange(new BoardChange(1, 1, CellState.Filled));
             var solver = new CrossOutCompletedLine();
 
-            var actualChanes = solver.Solve(board);
-            Assert.Equal(2, actualChanes.Count());
+            var actualChanges = solver.Solve(board);
 
             var expected = new List<BoardChange>
             {
                 new BoardChange(0,1,CellState.Blocked),
                 new BoardChange(2,1,CellState.Blocked)
             };
-            Assert.Equal(expected, actualChanes);
+            Assert.Equal(expected, actualChanges);
         }
 
         [Fact]
@@ -65,8 +60,7 @@ namespace NonogramNet.Lib.Test.Solvers
                     new BoardChange(1, 1, CellState.Filled));
             var solver = new CrossOutCompletedLine();
 
-            var actualChanes = solver.Solve(board);
-            Assert.Equal(3, actualChanes.Count());
+            var actualChanges = solver.Solve(board);
 
             var expected = new List<BoardChange>
             {
@@ -74,7 +68,7 @@ namespace NonogramNet.Lib.Test.Solvers
                 new BoardChange(0,1,CellState.Blocked),
                 new BoardChange(2,1,CellState.Blocked)
             };
-            Assert.Equal(expected, actualChanes);
+            Assert.Equal(expected, actualChanges);
         }
     }
 }
