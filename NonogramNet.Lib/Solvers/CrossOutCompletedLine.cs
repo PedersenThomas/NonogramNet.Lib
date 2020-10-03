@@ -24,7 +24,7 @@ namespace NonogramNet.Lib.Solvers
             var count = 0;
             for (int x = 0; x < board.Width; x++)
             {
-                var groups = Grouper.GroupVertical(board, x);
+                var groups = SimpleGrouper.GroupVertical(board, x);
                 var containsNones = groups.Any(p => p.state == CellState.None);
                 var filledIn = groups.Where(p => p.state == CellState.Filled).ToList();
 
@@ -63,7 +63,7 @@ namespace NonogramNet.Lib.Solvers
             var count = 0;
             for (int y = 0; y < board.Height; y++)
             {
-                var groups = Grouper.GroupHorizontal(board, y);
+                var groups = SimpleGrouper.GroupHorizontal(board, y);
                 var containsNones = groups.Any(p => p.state == CellState.None);
                 var filledIn = groups.Where(p => p.state == CellState.Filled).ToList();
 

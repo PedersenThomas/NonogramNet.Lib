@@ -6,13 +6,13 @@ using Xunit;
 
 namespace NonogramNet.Lib.Test
 {
-    public class GrouperTests
+    public class SimpleGrouperTests
     {
         [Fact]
         public void EmptyBoardHorizontal()
         {
             var board = BoardSamples.Board1;
-            var horizontalGroup = Grouper.GroupHorizontal(board, 0);
+            var horizontalGroup = SimpleGrouper.GroupHorizontal(board, 0);
             var expected = new List<(CellState state, int count)>
             {
                 (CellState.None, 5)
@@ -24,7 +24,7 @@ namespace NonogramNet.Lib.Test
         public void EmptyBoardVertical()
         {
             var board = BoardSamples.Board1;
-            var horizontalGroup = Grouper.GroupVertical(board, 0);
+            var horizontalGroup = SimpleGrouper.GroupVertical(board, 0);
             var expected = new List<(CellState state, int count)>
             {
                 (CellState.None, 5)
@@ -41,7 +41,7 @@ namespace NonogramNet.Lib.Test
                     new BoardChange(0, 1, CellState.Filled),
                     new BoardChange(0, 3, CellState.Filled)
                 );
-            var verticalGroup = Grouper.GroupVertical(board, 0);
+            var verticalGroup = SimpleGrouper.GroupVertical(board, 0);
             var expected = new List<(CellState state, int count)>
             {
                 (CellState.Filled, 2),

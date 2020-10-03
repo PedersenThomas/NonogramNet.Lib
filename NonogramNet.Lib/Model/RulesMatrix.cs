@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace NonogramNet.Lib.Model
 {
-    public class RulesMatrix
+    public class RulesMatrix: IEnumerable<List<int>>
     {
         private List<List<int>> Rules { get; set; }
 
@@ -52,6 +53,16 @@ namespace NonogramNet.Lib.Model
         public List<int> GetRuleLineAt(int index)
         {
             return Rules[index];
+        }
+
+        public IEnumerator<List<int>> GetEnumerator()
+        {
+            return this.Rules.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
