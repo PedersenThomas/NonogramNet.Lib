@@ -70,5 +70,24 @@ namespace NonogramNet.Lib.Test.Solvers
             };
             Assert.Equal(expected, actualChanges);
         }
+
+        [Fact]
+        public void BoardWithEmptyLine()
+        {
+            var board = BoardSamples.Board1;
+            var solver = new CrossOutCompletedLine();
+
+            var actualChanges = solver.Solve(board);
+
+            var expected = new List<BoardChange>
+            {
+                new BoardChange(0,4,CellState.Blocked),
+                new BoardChange(1,4,CellState.Blocked),
+                new BoardChange(2,4,CellState.Blocked),
+                new BoardChange(3,4,CellState.Blocked),
+                new BoardChange(4,4,CellState.Blocked)
+            };
+            Assert.Equal(expected, actualChanges);
+        }
     }
 }

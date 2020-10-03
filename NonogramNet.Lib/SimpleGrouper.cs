@@ -5,7 +5,7 @@ using NonogramNet.Lib.Model;
 
 namespace NonogramNet.Lib
 {
-    public static class Grouper
+    public static class SimpleGrouper
     {
         public static List<(CellState state, int count)> GroupVertical(Board board, int lineIndex)
         {
