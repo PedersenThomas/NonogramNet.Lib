@@ -1,0 +1,1 @@
+// If a line contains a number that satisfies n*2 > LineSize. Ie. the number must meet in the middle of the line.
