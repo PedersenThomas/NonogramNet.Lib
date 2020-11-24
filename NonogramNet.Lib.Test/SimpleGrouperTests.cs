@@ -17,7 +17,7 @@ namespace NonogramNet.Lib.Test
             {
                 (CellState.None, 5)
             };
-            Assert.Equal(expected, horizontalGroup);
+            Assert.Equal(expected, horizontalGroup.Groups);
         }
 
         [Fact]
@@ -29,7 +29,7 @@ namespace NonogramNet.Lib.Test
             {
                 (CellState.None, 5)
             };
-            Assert.Equal(expected, horizontalGroup);
+            Assert.Equal(expected, horizontalGroup.Groups);
         }
 
         [Fact]
@@ -49,7 +49,7 @@ namespace NonogramNet.Lib.Test
                 (CellState.Filled, 1),
                 (CellState.None, 1),
             };
-            Assert.Equal(expected, verticalGroup);
+            Assert.Equal(expected, verticalGroup.Groups);
         }
 
         [Fact]
@@ -70,7 +70,7 @@ namespace NonogramNet.Lib.Test
                 (CellState.Filled, 1),
                 (CellState.Blocked, 1)
             };
-            Assert.Equal(expected, verticalGroup);
+            Assert.Equal(expected, verticalGroup.Groups);
 
             var horizontalGroup = SimpleGrouper.GroupHorizontal(board, 4);
             var expectedHorizontal = new List<(CellState state, int count)>
@@ -78,7 +78,7 @@ namespace NonogramNet.Lib.Test
                 (CellState.Blocked, 1),
                 (CellState.None, 4)
             };
-            Assert.Equal(expectedHorizontal, horizontalGroup);
+            Assert.Equal(expectedHorizontal, horizontalGroup.Groups);
         }
     }
 }

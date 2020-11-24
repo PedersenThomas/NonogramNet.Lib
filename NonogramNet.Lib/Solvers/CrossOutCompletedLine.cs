@@ -20,30 +20,11 @@ namespace NonogramNet.Lib.Solvers
 
         private static void VerticalRulesCheck(Board board, HashSet<BoardChange> changes)
         {
-            var lastCellState = CellState.None;
-            var count = 0;
             for (int x = 0; x < board.Width; x++)
             {
                 var groups = SimpleGrouper.GroupVertical(board, x);
-                var containsNones = groups.Any(p => p.state == CellState.None);
-                var filledIn = groups.Where(p => p.state == CellState.Filled).ToList();
-
                 var ruleLine = board.TopRules.GetRuleLineAt(x);
-                bool match = false;
-                if (containsNones && filledIn.Count == ruleLine.Count)
-                {
-                    match = true;
-                    for (int i = 0; i < filledIn.Count; i++)
-                    {
-                        if (filledIn[i].count != ruleLine[i])
-                        {
-                            match = false;
-                            break;
-                        }
-                    }
-                }
-
-                if (match)
+                if (groups.ContainsNones && groups.SatisfiesRuleLine(ruleLine))
                 {
                     for (int y = 0; y < board.Height; y++)
                     {
@@ -59,30 +40,11 @@ namespace NonogramNet.Lib.Solvers
 
         private static void HorizontalRulesCheck(Board board, HashSet<BoardChange> changes)
         {
-            var lastCellState = CellState.None;
-            var count = 0;
             for (int y = 0; y < board.Height; y++)
             {
                 var groups = SimpleGrouper.GroupHorizontal(board, y);
-                var containsNones = groups.Any(p => p.state == CellState.None);
-                var filledIn = groups.Where(p => p.state == CellState.Filled).ToList();
-
                 var ruleLine = board.LeftRules.GetRuleLineAt(y);
-                bool match = false;
-                if (containsNones && filledIn.Count == ruleLine.Count)
-                {
-                    match = true;
-                    for (int i = 0; i < filledIn.Count; i++)
-                    {
-                        if (filledIn[i].count != ruleLine[i])
-                        {
-                            match = false;
-                            break;
-                        }
-                    }
-                }
-
-                if (match)
+                if (groups.ContainsNones && groups.SatisfiesRuleLine(ruleLine))
                 {
                     for (int x = 0; x < board.Width; x++)
                     {

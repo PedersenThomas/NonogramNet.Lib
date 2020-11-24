@@ -7,7 +7,7 @@ namespace NonogramNet.Lib
 {
     public static class SimpleGrouper
     {
-        public static List<(CellState state, int count)> GroupVertical(Board board, int lineIndex)
+        public static Group GroupVertical(Board board, int lineIndex)
         {
             var result = new List<(CellState state, int count)>();
             int count = 0;
@@ -28,10 +28,10 @@ namespace NonogramNet.Lib
             }
             result.Add((lastState, count));
 
-            return result;
+            return new Group(result);
         }
 
-        public static List<(CellState state, int count)> GroupHorizontal(Board board, int lineIndex)
+        public static Group GroupHorizontal(Board board, int lineIndex)
         {
             var result = new List<(CellState state, int count)>();
             int count = 0;
@@ -52,7 +52,7 @@ namespace NonogramNet.Lib
             }
             result.Add((lastState, count));
 
-            return result;
+            return new Group(result);
         }
     }
 }
