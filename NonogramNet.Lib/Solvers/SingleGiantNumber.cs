@@ -33,11 +33,11 @@ namespace NonogramNet.Lib.Solvers
                 if (f > 0)
                 {
                     var e = ruleLine[0] - f;
-                    for (int FilledCells = e; FilledCells < e + f; FilledCells++)
+                    for (int filledCells = e; filledCells < e + f; filledCells++)
                     {
-                        if (board[x, FilledCells] == CellState.None)
+                        if (board[x, filledCells] == CellState.None)
                         {
-                            changes.Add(new BoardChange(x, FilledCells, CellState.Filled));
+                            changes.Add(new BoardChange(x, filledCells, CellState.Filled));
                         }
                     }
                 }
