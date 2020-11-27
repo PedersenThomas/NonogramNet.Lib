@@ -19,10 +19,7 @@ namespace NonogramNet.Lib.Solvers
             Vertical(new TransposedBoard(board), transposedChanges);
             if (transposedChanges.Count > 0)
             {
-                foreach (var boardChange in transposedChanges)
-                {
-                    changes.Add(boardChange.Transpose());
-                }
+                changes.Add(transposedChanges.Transpose());
             }
 
             return changes;

@@ -14,6 +14,7 @@ namespace NonogramNet.Lib.Solvers
             combine.Add(new CrossOutCompletedLine());
             combine.Add(new FillEntireLine());
             combine.Add(new SingleGiantNumber());
+            combine.Add(new OnlyOneWayToFill());
 
             return combine;
         });
