@@ -44,10 +44,15 @@ namespace NonogramNet.Lib.Model
             return new RulesMatrix(newRules);
         }
 
+        public List<int> this[int x]
+        {
+            get => this.GetRuleLineAt(x);
+        }
+
         public int this[int x, int y]
         {
-            get { return this.Rules[x][y]; }
-            private set { this.Rules[x][y] = value; }
+            get => this.Rules[x][y];
+            private set => this.Rules[x][y] = value;
         }
 
         public List<int> GetRuleLineAt(int index)

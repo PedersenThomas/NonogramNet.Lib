@@ -19,7 +19,7 @@ namespace NonogramNet.Lib.Solvers
             this.solvers.Add(solver);
         }
 
-        public IEnumerable<BoardChange> Solve(Board board)
+        public IEnumerable<BoardChange> Solve(IBoard board)
         {
             var changes = new List<BoardChange>();
             foreach (var solver in solvers)

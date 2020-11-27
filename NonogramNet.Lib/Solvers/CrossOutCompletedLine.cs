@@ -8,7 +8,7 @@ namespace NonogramNet.Lib.Solvers
 {
     public class CrossOutCompletedLine: ISolver
     {
-        public IEnumerable<BoardChange> Solve(Board board)
+        public IEnumerable<BoardChange> Solve(IBoard board)
         {
             var changes = new HashSet<BoardChange>();
 
@@ -18,7 +18,7 @@ namespace NonogramNet.Lib.Solvers
             return changes;
         }
 
-        private static void VerticalRulesCheck(Board board, HashSet<BoardChange> changes)
+        private static void VerticalRulesCheck(IBoard board, HashSet<BoardChange> changes)
         {
             for (int x = 0; x < board.Width; x++)
             {
@@ -38,7 +38,7 @@ namespace NonogramNet.Lib.Solvers
             }
         }
 
-        private static void HorizontalRulesCheck(Board board, HashSet<BoardChange> changes)
+        private static void HorizontalRulesCheck(IBoard board, HashSet<BoardChange> changes)
         {
             for (int y = 0; y < board.Height; y++)
             {

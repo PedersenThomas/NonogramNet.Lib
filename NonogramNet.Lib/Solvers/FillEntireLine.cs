@@ -7,7 +7,7 @@ namespace NonogramNet.Lib.Solvers
 {
     public class FillEntireLine : ISolver
     {
-        public IEnumerable<BoardChange> Solve(Board board)
+        public IEnumerable<BoardChange> Solve(IBoard board)
         {
             var changes = new HashSet<BoardChange>();
 

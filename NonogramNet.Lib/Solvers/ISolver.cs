@@ -7,6 +7,6 @@ namespace NonogramNet.Lib.Solvers
 {
     public interface ISolver
     {
-        IEnumerable<BoardChange> Solve(Board board);
+        IEnumerable<BoardChange> Solve(IBoard board);
     }
 }
