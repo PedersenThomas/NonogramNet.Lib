@@ -49,7 +49,10 @@ namespace NonogramNet.Lib.Solvers
 
                         if (y < board.Height)
                         {
-                            changes.Add(new BoardChange(x, y, CellState.Blocked));
+                            if (board[x, y] == CellState.None)
+                            {
+                                changes.Add(new BoardChange(x, y, CellState.Blocked));
+                            }
                             y += 1;
                         }
                     }
