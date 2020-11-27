@@ -6,7 +6,7 @@ using Xunit;
 
 namespace NonogramNet.Lib.Test
 {
-    public class BoardChanges
+    public class BoardChangesTest
     {
         [Fact]
         public void SemanticEquals()

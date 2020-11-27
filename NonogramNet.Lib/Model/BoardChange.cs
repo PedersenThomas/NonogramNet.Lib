@@ -19,6 +19,11 @@ namespace NonogramNet.Lib.Model
             this.NewValue = value;
         }
 
+        public BoardChange Transpose()
+        {
+            return new BoardChange(this.Y, this.X, this.NewValue);
+        }
+
         public override string ToString()
         {
             return $"({this.X},{this.Y}) -> {this.NewValue}";

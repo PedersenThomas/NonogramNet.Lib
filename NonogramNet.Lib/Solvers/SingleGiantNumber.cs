@@ -7,13 +7,23 @@ using NonogramNet.Lib.Model;
 
 namespace NonogramNet.Lib.Solvers
 {
+    using System.Linq;
+
     public class SingleGiantNumber : ISolver
     {
         public IEnumerable<BoardChange> Solve(IBoard board)
         {
             var changes = new HashSet<BoardChange>();
             Vertical(board, changes);
-            Vertical(new TransposedBoard(board), changes);
+            var transposedChanges = new HashSet<BoardChange>();
+            Vertical(new TransposedBoard(board), transposedChanges);
+            if (transposedChanges.Count > 0)
+            {
+                foreach (var boardChange in transposedChanges)
+                {
+                    changes.Add(boardChange.Transpose());
+                }
+            }
 
             return changes;
         }

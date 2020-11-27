@@ -7,22 +7,33 @@ namespace NonogramNet.Lib.Solvers
 {
     public class SolverCombiner : ISolver
     {
-        private List<ISolver> solvers { get; }
+        public static Lazy<ISolver> AllSolvers = new Lazy<ISolver>(() =>
+        {
+            var combine = new SolverCombiner();
+
+            combine.Add(new CrossOutCompletedLine());
+            combine.Add(new FillEntireLine());
+            combine.Add(new SingleGiantNumber());
+
+            return combine;
+        });
+
+        private List<ISolver> Solvers { get; }
 
         public SolverCombiner()
         {
-            this.solvers = new List<ISolver>();
+            this.Solvers = new List<ISolver>();
         }
 
         public void Add(ISolver solver)
         {
-            this.solvers.Add(solver);
+            this.Solvers.Add(solver);
         }
 
         public IEnumerable<BoardChange> Solve(IBoard board)
         {
             var changes = new List<BoardChange>();
-            foreach (var solver in solvers)
+            foreach (var solver in Solvers)
             {
                 var c = solver.Solve(board);
                 if (c != null)
