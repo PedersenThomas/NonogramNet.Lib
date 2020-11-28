@@ -13,20 +13,20 @@ namespace NonogramNet.Lib.Test
     {
         [Theory]
         [MemberData(nameof(AllBoards))]
-        public void SolveBoard(IBoard board) => SolveAndVerifyBoard(board);
+        public void SolveBoard(string name, IBoard board) => SolveAndVerifyBoard(name, board);
 
         public static IEnumerable<object[]> AllBoards() =>
             new List<object[]>
             {
-                new object[]{BoardSamples.Board1},
-                new object[]{BoardSamples.Board2},
-                new object[]{BoardSamples.Board3},
-                new object[]{BoardSamples.Board4},
-                new object[]{BoardSamples.Board5},
-                new object[]{BoardSamples.Board6},
+                new object[]{nameof(BoardSamples.Board1), BoardSamples.Board1},
+                new object[]{nameof(BoardSamples.Board2), BoardSamples.Board2},
+                new object[]{nameof(BoardSamples.Board3), BoardSamples.Board3},
+                new object[]{nameof(BoardSamples.Board4), BoardSamples.Board4},
+                new object[]{nameof(BoardSamples.Board5), BoardSamples.Board5},
+                new object[]{nameof(BoardSamples.Board6), BoardSamples.Board6},
             };
 
-        private void SolveAndVerifyBoard(IBoard board)
+        private void SolveAndVerifyBoard(string name, IBoard board)
         {
             var solver = SolverCombiner.AllSolvers.Value;
 
@@ -37,7 +37,7 @@ namespace NonogramNet.Lib.Test
                 board = board.ApplyChanges(changes);
             } while (changes.Any());
 
-            Assert.True(BoardChecker.IsBoardCompleted(board));
+            Assert.True(BoardChecker.IsBoardCompleted(board), $"Board: {name}\n{BoardASCIIArt.BoardOnlyAsciiArt(board)}");
         }
     }
 }

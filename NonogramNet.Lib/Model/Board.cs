@@ -135,40 +135,6 @@
             return new Board(topRules, leftRules, newMatrix);
         }
 
-        public string BoardOnlyAsciiArt()
-        {
-            var buffer = new StringBuilder();
-
-            for (var y = 0; y < Height; y++)
-            {
-                for (var x = 0; x < Width; x++)
-                {
-                    var state = this[x, y];
-                    var ascii = StateAsAsciiArt(state);
-                    buffer.Append(ascii);
-                }
-
-                buffer.AppendLine();
-            }
-
-            return buffer.ToString();
-        }
-
-        private string StateAsAsciiArt(CellState state)
-        {
-            switch (state)
-            {
-                case CellState.None:
-                    return "_";
-                case CellState.Filled:
-                    return "O";
-                case CellState.Blocked:
-                    return "X";
-            }
-
-            return state.ToString();
-        }
-
         private static CellState[,] CloneMatrix(CellState[,] oldMatrix)
         {
             var newMatrix = new CellState[oldMatrix.GetLength(0), oldMatrix.GetLength(1)];

@@ -25,7 +25,7 @@ namespace NonogramNet.Lib.Model
         public bool SatisfiesRuleLine(List<int> ruleLine)
         {
             bool matches = false;
-            if (this.ContainsNones && this.FilledGroups.Count == ruleLine.Count)
+            if (this.FilledGroups.Count == ruleLine.Count)
             {
                 matches = true;
                 for (int i = 0; i < FilledGroups.Count; i++)
