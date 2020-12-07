@@ -15,6 +15,7 @@ namespace NonogramNet.Lib.Solvers
             combine.Add(new FillEntireLine());
             combine.Add(new SingleGiantNumber());
             combine.Add(new OnlyOneWayToFill());
+            combine.Add(new LargestNumberInRuleIsSolvedWrapInBlocked());
 
             return combine;
         });

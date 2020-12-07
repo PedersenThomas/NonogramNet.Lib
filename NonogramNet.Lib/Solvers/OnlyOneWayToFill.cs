@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace NonogramNet.Lib.Solvers
+﻿namespace NonogramNet.Lib.Solvers
 {
+    using System.Collections.Generic;
     using System.Linq;
-    using System.Security.Cryptography;
     using Model;
 
     // if the sum of all the rule numbers + count of rules + minus 1 = grid size

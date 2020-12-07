@@ -13,9 +13,9 @@ namespace NonogramNet.Lib.Test
         {
             var board = BoardSamples.Board1;
             var horizontalGroup = SimpleGrouper.GroupHorizontal(board, 0);
-            var expected = new List<(CellState state, int count)>
+            var expected = new List<Group>
             {
-                (CellState.None, 5)
+                new Group(CellState.None, 0, 5)
             };
             Assert.Equal(expected, horizontalGroup.Groups);
         }
@@ -25,9 +25,9 @@ namespace NonogramNet.Lib.Test
         {
             var board = BoardSamples.Board1;
             var horizontalGroup = SimpleGrouper.GroupVertical(board, 0);
-            var expected = new List<(CellState state, int count)>
+            var expected = new List<Group>
             {
-                (CellState.None, 5)
+                new Group(CellState.None, 0, 5)
             };
             Assert.Equal(expected, horizontalGroup.Groups);
         }
@@ -42,12 +42,12 @@ namespace NonogramNet.Lib.Test
                     new BoardChange(0, 3, CellState.Filled)
                 );
             var verticalGroup = SimpleGrouper.GroupVertical(board, 0);
-            var expected = new List<(CellState state, int count)>
+            var expected = new List<Group>
             {
-                (CellState.Filled, 2),
-                (CellState.None, 1),
-                (CellState.Filled, 1),
-                (CellState.None, 1),
+                new Group(CellState.Filled, 0, 2),
+                new Group(CellState.None, 2, 1),
+                new Group(CellState.Filled, 3, 1),
+                new Group(CellState.None, 4, 1),
             };
             Assert.Equal(expected, verticalGroup.Groups);
         }
@@ -63,20 +63,20 @@ namespace NonogramNet.Lib.Test
                     new BoardChange(0,4, CellState.Blocked)
                 );
             var verticalGroup = SimpleGrouper.GroupVertical(board, 0);
-            var expected = new List<(CellState state, int count)>
+            var expected = new List<Group>
             {
-                (CellState.Filled, 2),
-                (CellState.None, 1),
-                (CellState.Filled, 1),
-                (CellState.Blocked, 1)
+                new Group(CellState.Filled, 0, 2),
+                new Group(CellState.None, 2, 1),
+                new Group(CellState.Filled, 3, 1),
+                new Group(CellState.Blocked, 4, 1)
             };
             Assert.Equal(expected, verticalGroup.Groups);
 
             var horizontalGroup = SimpleGrouper.GroupHorizontal(board, 4);
-            var expectedHorizontal = new List<(CellState state, int count)>
+            var expectedHorizontal = new List<Group>
             {
-                (CellState.Blocked, 1),
-                (CellState.None, 4)
+                new Group(CellState.Blocked, 0, 1),
+                new Group(CellState.None, 1, 4)
             };
             Assert.Equal(expectedHorizontal, horizontalGroup.Groups);
         }

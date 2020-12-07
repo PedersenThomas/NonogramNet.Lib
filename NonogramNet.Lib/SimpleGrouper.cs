@@ -7,52 +7,56 @@ namespace NonogramNet.Lib
 {
     public static class SimpleGrouper
     {
-        public static Group GroupVertical(IBoard board, int lineIndex)
+        public static GroupCollection GroupVertical(IBoard board, int lineIndex)
         {
-            var result = new List<(CellState state, int count)>();
+            var result = new List<Group>();
             int count = 0;
+            int startIndex = 0;
             CellState lastState = board[lineIndex, 0];
             for (int i = 0; i < board.Height; i++)
             {
                 var current = board[lineIndex, i];
                 if (current != lastState)
                 {
-                    result.Add((lastState, count));
+                    result.Add(new Group(lastState, startIndex, count));
                     lastState = current;
                     count = 1;
+                    startIndex = i;
                 }
                 else
                 {
                     count += 1;
                 }
             }
-            result.Add((lastState, count));
+            result.Add(new Group(lastState, startIndex, count));
 
-            return new Group(result);
+            return new GroupCollection(result);
         }
 
-        public static Group GroupHorizontal(IBoard board, int lineIndex)
+        public static GroupCollection GroupHorizontal(IBoard board, int lineIndex)
         {
-            var result = new List<(CellState state, int count)>();
+            var result = new List<Group>();
             int count = 0;
+            int startIndex = 0;
             CellState lastState = board[0, lineIndex];
             for (int i = 0; i < board.Width; i++)
             {
                 var current = board[i, lineIndex];
                 if (current != lastState)
                 {
-                    result.Add((lastState, count));
+                    result.Add(new Group(lastState, startIndex, count));
                     lastState = current;
                     count = 1;
+                    startIndex = i;
                 }
                 else
                 {
                     count += 1;
                 }
             }
-            result.Add((lastState, count));
+            result.Add(new Group(lastState, startIndex, count));
 
-            return new Group(result);
+            return new GroupCollection(result);
         }
     }
 }
