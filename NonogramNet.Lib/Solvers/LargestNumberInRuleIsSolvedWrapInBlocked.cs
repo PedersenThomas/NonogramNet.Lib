@@ -39,13 +39,13 @@ namespace NonogramNet.Lib.Solvers
                     {
                         if (group.StartIndex > 0 && board[x, group.StartIndex-1] == CellState.None)
                         {
-                            changes.Add(new BoardChange(x, group.StartIndex-1, CellState.Blocked));
+                            changes.Add(BoardChange.Blocked(x, group.StartIndex-1));
                         }
 
                         var lastIndex = group.StartIndex + group.Count;
                         if (board.Height < lastIndex && board[x, lastIndex] == CellState.None)
                         {
-                            changes.Add(new BoardChange(x, lastIndex, CellState.Blocked));
+                            changes.Add(BoardChange.Blocked(x, lastIndex));
                         }
                     }
                 }

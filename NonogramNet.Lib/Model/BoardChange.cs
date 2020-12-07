@@ -19,6 +19,12 @@ namespace NonogramNet.Lib.Model
             this.NewValue = value;
         }
 
+        public static BoardChange Filled(int x, int y) => new BoardChange(x, y, CellState.Filled);
+
+        public static BoardChange None(int x, int y) => new BoardChange(x, y, CellState.None);
+
+        public static BoardChange Blocked(int x, int y) => new BoardChange(x, y, CellState.Blocked);
+
         public BoardChange Transpose()
         {
             return new BoardChange(this.Y, this.X, this.NewValue);

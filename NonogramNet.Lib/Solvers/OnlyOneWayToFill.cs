@@ -38,7 +38,7 @@
                         {
                             if (board[x, y] == CellState.None)
                             {
-                                changes.Add(new BoardChange(x, y, CellState.Filled));
+                                changes.Add(BoardChange.Filled(x,y));
                             }
                             y += 1;
                         }
@@ -47,7 +47,7 @@
                         {
                             if (board[x, y] == CellState.None)
                             {
-                                changes.Add(new BoardChange(x, y, CellState.Blocked));
+                                changes.Add(BoardChange.Blocked(x,y));
                             }
                             y += 1;
                         }

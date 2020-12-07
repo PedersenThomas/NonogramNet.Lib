@@ -20,7 +20,7 @@ namespace NonogramNet.Lib.Solvers
                     {
                         if (board[x, y] == CellState.None)
                         {
-                            changes.Add(new BoardChange(x, y, CellState.Filled));
+                            changes.Add(BoardChange.Filled(x, y));
                         }
                     }
                 }
@@ -35,7 +35,7 @@ namespace NonogramNet.Lib.Solvers
                     {
                         if (board[x, y] == CellState.None)
                         {
-                            changes.Add(new BoardChange(x, y, CellState.Filled));
+                            changes.Add(BoardChange.Filled(x, y));
                         }
                     }
                 }

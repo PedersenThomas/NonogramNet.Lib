@@ -31,7 +31,7 @@ namespace NonogramNet.Lib.Solvers
                         var state = board[x, y];
                         if (state == CellState.None)
                         {
-                            changes.Add(new BoardChange(x, y, CellState.Blocked));
+                            changes.Add(BoardChange.Blocked(x,y));
                         }
                     }
                 }
@@ -51,7 +51,7 @@ namespace NonogramNet.Lib.Solvers
                         var state = board[x, y];
                         if (state == CellState.None)
                         {
-                            changes.Add(new BoardChange(x, y, CellState.Blocked));
+                            changes.Add(BoardChange.Blocked(x,y));
                         }
                     }
                 }

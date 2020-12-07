@@ -44,7 +44,7 @@ namespace NonogramNet.Lib.Solvers
                     {
                         if (board[x, filledCells] == CellState.None)
                         {
-                            changes.Add(new BoardChange(x, filledCells, CellState.Filled));
+                            changes.Add(BoardChange.Filled(x,filledCells));
                         }
                     }
                 }
