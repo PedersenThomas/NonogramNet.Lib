@@ -14,12 +14,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NonogramNet.Lib\NonogramNet.Lib.csproj" />
+    <ProjectReference Include="..\Nonogramnet.lib\Nonogramnet.lib.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="TestBoards\Example1.non">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Update="TestBoards\example.non">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

@@ -16,6 +16,7 @@ namespace NonogramNet.Lib.Model
         {
             this.Rules = new List<List<int>>();
         }
+
         private RulesMatrix(List<List<int>> rules)
         {
             this.Rules = rules;
