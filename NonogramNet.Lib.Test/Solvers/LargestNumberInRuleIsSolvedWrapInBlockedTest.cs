@@ -7,8 +7,17 @@ using Xunit;
 
 namespace NonogramNet.Lib.Test.Solvers
 {
+    using Xunit.Abstractions;
+
     public class LargestNumberInRuleIsSolvedWrapInBlockedTest
     {
+        private readonly ITestOutputHelper _testOutputHelper;
+
+        public LargestNumberInRuleIsSolvedWrapInBlockedTest(ITestOutputHelper testOutputHelper)
+        {
+            _testOutputHelper = testOutputHelper;
+        }
+
         [Fact]
         public void EmptyBoard_NoChanges()
         {
@@ -33,32 +42,38 @@ namespace NonogramNet.Lib.Test.Solvers
 
             var expected = new List<BoardChange>
             {
+                new BoardChange(2,1,CellState.Blocked),
                 new BoardChange(0,0,CellState.Blocked)
             };
             Assert.Equal(expected, actualChanges);
         }
 
         [Fact]
-        public void T2()
+        public void EntireRowsAndColumnsFilled()
         {
-            var board = BoardSamples.Board3;
+            var board = BoardSamples.Board3
+                .ApplyChanges(
+                    new BoardChange(0, 0, CellState.Filled),
+                    new BoardChange(1, 0, CellState.Filled),
+                    new BoardChange(2, 0, CellState.Filled),
+                    new BoardChange(2, 1, CellState.Filled),
+                    new BoardChange(2, 2, CellState.Filled)
+                );
+            _testOutputHelper.WriteLine(BoardASCIIArt.BoardOnlyAsciiArt(board));
             var solver = new LargestNumberInRuleIsSolvedWrapInBlocked();
 
             var actualChanges = solver.Solve(board);
 
             var expected = new List<BoardChange>
             {
-                new BoardChange(0,0,CellState.Filled),
-                new BoardChange(1,0,CellState.Filled),
-                new BoardChange(2,0,CellState.Filled),
-                new BoardChange(2,1,CellState.Filled),
-                new BoardChange(2,2,CellState.Filled)
+                new BoardChange(0, 1, CellState.Blocked),
+                new BoardChange(1, 2, CellState.Blocked)
             };
             Assert.Equal(expected, actualChanges);
         }
 
         [Fact]
-        public void T3()
+        public void BoardWithEmptyLine()
         {
             var board = BoardSamples.Board4;
             var solver = new LargestNumberInRuleIsSolvedWrapInBlocked();

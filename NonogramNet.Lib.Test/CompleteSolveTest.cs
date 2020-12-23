@@ -22,8 +22,8 @@ namespace NonogramNet.Lib.Test
                 new object[]{nameof(BoardSamples.Board2), BoardSamples.Board2},
                 new object[]{nameof(BoardSamples.Board3), BoardSamples.Board3},
                 new object[]{nameof(BoardSamples.Board4), BoardSamples.Board4},
-                new object[]{nameof(BoardSamples.Board5), BoardSamples.Board5},
-                new object[]{nameof(BoardSamples.Board6), BoardSamples.Board6},
+                //new object[]{nameof(BoardSamples.Board5), BoardSamples.Board5},
+                //new object[]{nameof(BoardSamples.Board6), BoardSamples.Board6},
             };
 
         private void SolveAndVerifyBoard(string name, IBoard board)

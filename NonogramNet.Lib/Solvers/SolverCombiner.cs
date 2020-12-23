@@ -12,7 +12,6 @@ namespace NonogramNet.Lib.Solvers
             var combine = new SolverCombiner();
 
             combine.Add(new CrossOutCompletedLine());
-            combine.Add(new FillEntireLine());
             combine.Add(new SingleGiantNumber());
             combine.Add(new OnlyOneWayToFill());
             combine.Add(new LargestNumberInRuleIsSolvedWrapInBlocked());

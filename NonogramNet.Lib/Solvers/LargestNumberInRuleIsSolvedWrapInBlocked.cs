@@ -28,6 +28,10 @@ namespace NonogramNet.Lib.Solvers
             {
                 var groups = SimpleGrouper.GroupVertical(board, x);
                 var ruleLine = board.TopRules[x];
+                if (ruleLine.Count == 0)
+                {
+                    continue;
+                }
                 var highestRuleNumber = ruleLine.Max();
                 if (!groups.ContainsNones || highestRuleNumber == 0)
                 {
@@ -37,13 +41,14 @@ namespace NonogramNet.Lib.Solvers
                 {
                     if (group.State == CellState.Filled && group.Count == highestRuleNumber)
                     {
+                        // Block off before the start of the group.
                         if (group.StartIndex > 0 && board[x, group.StartIndex-1] == CellState.None)
                         {
                             changes.Add(BoardChange.Blocked(x, group.StartIndex-1));
                         }
 
                         var lastIndex = group.StartIndex + group.Count;
-                        if (board.Height < lastIndex && board[x, lastIndex] == CellState.None)
+                        if (lastIndex < board.Height && board[x, lastIndex] == CellState.None)
                         {
                             changes.Add(BoardChange.Blocked(x, lastIndex));
                         }

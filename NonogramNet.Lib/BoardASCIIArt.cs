@@ -6,7 +6,7 @@ namespace NonogramNet.Lib
 {
     using Model;
 
-    public class BoardASCIIArt
+    public static class BoardASCIIArt
     { 
         public static string BoardOnlyAsciiArt(IBoard board)
         {
@@ -34,9 +34,9 @@ namespace NonogramNet.Lib
                 case CellState.None:
                     return "_";
                 case CellState.Filled:
-                    return "O";
+                    return "o";
                 case CellState.Blocked:
-                    return "X";
+                    return "x";
             }
 
             return state.ToString();
