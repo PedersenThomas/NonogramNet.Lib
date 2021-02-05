@@ -8,6 +8,7 @@ namespace NonogramNet.Lib.Solvers
 
     public class FirstGroupTooSmall : ISolver
     {
+        // TODO: Implement FlippedBoard or make it work from the other end as well
         public IEnumerable<BoardChange> Solve(IBoard board)
         {
             var changes = new HashSet<BoardChange>();
