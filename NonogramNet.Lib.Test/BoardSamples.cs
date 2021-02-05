@@ -146,5 +146,27 @@ namespace NonogramNet.Lib.Test
                 new List<int> {6},
             })
         );
+
+        /* ___XX
+         * _____
+         * _____
+         * X____
+         * X____
+         * 
+         */
+        public static IBoard Board7 = Board.MakeBoard(
+            RulesMatrix.MakeRulesMatrix(new List<List<int>> {
+                new List<int> {2},
+                new List<int>(),
+                new List<int>(),
+                new List<int> {1},
+                new List<int> {1}}),
+            RulesMatrix.MakeRulesMatrix(new List<List<int>> {
+                new List<int> {2},
+                new List<int>(),
+                new List<int>(),
+                new List<int> {1},
+                new List<int> {1}})
+            );
     }
 }
