@@ -10,27 +10,27 @@ namespace NonogramNet.Lib.Model
 
         public bool ContainsNones { get; private set; }
 
-        private Lazy<List<Group>> FilledGroupsLazy;
+        private readonly Lazy<List<Group>> FilledGroupsLazy;
 
         public List<Group> FilledGroups => this.FilledGroupsLazy.Value;
 
         public GroupCollection(List<Group> groups)
         {
             this.Groups = groups;
-            this.FilledGroupsLazy = new Lazy<List<Group>>(computeFilledGroups);
+            this.FilledGroupsLazy = new Lazy<List<Group>>(this.ComputeFilledGroups);
 
-            Analyze();
+            this.Analyze();
         }
 
-        public bool SatisfiesRuleLine(List<int> ruleLine)
+        public bool SatisfiesRuleLine(IRuleLine ruleLine)
         {
             bool matches = false;
             if (this.FilledGroups.Count == ruleLine.Count)
             {
                 matches = true;
-                for (int i = 0; i < FilledGroups.Count; i++)
+                for (int i = 0; i < this.FilledGroups.Count; i++)
                 {
-                    if (FilledGroups[i].Count != ruleLine[i])
+                    if (this.FilledGroups[i].Count != ruleLine[i])
                     {
                         matches = false;
                         break;
@@ -42,12 +42,12 @@ namespace NonogramNet.Lib.Model
 
         private void Analyze()
         {
-            this.ContainsNones = Groups.Any(g => g.State == CellState.None);
+            this.ContainsNones = this.Groups.Any(g => g.State == CellState.None);
         }
 
-        private List<Group> computeFilledGroups()
+        private List<Group> ComputeFilledGroups()
         {
-            return Groups.Where(p => p.State == CellState.Filled).ToList();
+            return this.Groups.Where(p => p.State == CellState.Filled).ToList();
         }
     }
 }

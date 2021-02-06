@@ -13,7 +13,7 @@ namespace NonogramNet.Lib.Model
             this.board = board;
         }
 
-        public CellState this[int x, int y] => throw new NotImplementedException();
+        public CellState this[int x, int y] => this.board[this.board.Width-x, this.board.Height-y];
 
         public RulesMatrix TopRules => throw new NotImplementedException();
 

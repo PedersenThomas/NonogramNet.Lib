@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace NonogramNet.Lib.Model
 {
-    public class RulesMatrix: IEnumerable<List<int>>
+    public class RulesMatrix: IRulesMatrix
     {
-        private List<List<int>> Rules { get; set; }
+        private List<IRuleLine> Rules { get; set; }
 
         public int NumberOfRules => this.Rules.Count;
 
         private RulesMatrix()
         {
-            this.Rules = new List<List<int>>();
+            this.Rules = new List<IRuleLine>();
         }
 
-        private RulesMatrix(List<List<int>> rules)
+        private RulesMatrix(List<IRuleLine> rules)
         {
             this.Rules = rules;
         }
@@ -29,7 +27,7 @@ namespace NonogramNet.Lib.Model
                 throw new ArgumentNullException(nameof(rules));
             }
 
-            List<List<int>> newRules = new List<List<int>>();
+            List<IRuleLine> newRules = new List<IRuleLine>();
             int index = 0;
             foreach (List<int> ruleLine in rules)
             {
@@ -39,36 +37,29 @@ namespace NonogramNet.Lib.Model
                 }
 
                 index++;
-                newRules.Add(new List<int>(ruleLine));
+                newRules.Add(new RuleLine(ruleLine));
             }
 
             return new RulesMatrix(newRules);
         }
 
-        public List<int> this[int x]
+        public IRuleLine this[int x] => this.GetRuleLineAt(x);
+
+        public int this[int x, int y] => this.Rules[x][y];
+
+        public IRuleLine GetRuleLineAt(int index)
         {
-            get => this.GetRuleLineAt(x);
+            return this.Rules[index];
         }
 
-        public int this[int x, int y]
-        {
-            get => this.Rules[x][y];
-            private set => this.Rules[x][y] = value;
-        }
-
-        public List<int> GetRuleLineAt(int index)
-        {
-            return Rules[index];
-        }
-
-        public IEnumerator<List<int>> GetEnumerator()
+        public IEnumerator<IRuleLine> GetEnumerator()
         {
             return this.Rules.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
     }
 }
