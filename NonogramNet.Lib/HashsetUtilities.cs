@@ -9,9 +9,13 @@ namespace NonogramNet.Lib
 
     public static class HashsetUtilities
     {
-        public static IEnumerable<BoardChange> Transpose(this HashSet<BoardChange> changes)
+        public static IEnumerable<BoardChange> Transpose(this IEnumerable<BoardChange> changes)
         {
             return changes.Select(c => c.Transpose());
+        }
+        public static IEnumerable<BoardChange> Flip(this IEnumerable<BoardChange> changes, int width, int height)
+        {
+            return changes.Select(c => c.Flipped(width, height));
         }
 
         public static void Add<T>(this HashSet<T> collection, IEnumerable<T> items)

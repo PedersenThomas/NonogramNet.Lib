@@ -10,7 +10,7 @@ namespace NonogramNet.Lib.Solvers
     {
         public IEnumerable<BoardChange> Solve(IBoard board)
         {
-            var changes = new HashSet<BoardChange>();
+            HashSet<BoardChange>? changes = new HashSet<BoardChange>();
 
             VerticalRulesCheck(board, changes);
             HorizontalRulesCheck(board, changes);
@@ -22,13 +22,13 @@ namespace NonogramNet.Lib.Solvers
         {
             for (int x = 0; x < board.Width; x++)
             {
-                var groups = SimpleGrouper.GroupVertical(board, x);
-                var ruleLine = board.TopRules.GetRuleLineAt(x);
+                GroupCollection? groups = SimpleGrouper.GroupVertical(board, x);
+                IRuleLine? ruleLine = board.TopRules[x];
                 if (groups.ContainsNones && groups.SatisfiesRuleLine(ruleLine))
                 {
                     for (int y = 0; y < board.Height; y++)
                     {
-                        var state = board[x, y];
+                        CellState state = board[x, y];
                         if (state == CellState.None)
                         {
                             changes.Add(BoardChange.Blocked(x,y));
@@ -42,13 +42,13 @@ namespace NonogramNet.Lib.Solvers
         {
             for (int y = 0; y < board.Height; y++)
             {
-                var groups = SimpleGrouper.GroupHorizontal(board, y);
-                var ruleLine = board.LeftRules.GetRuleLineAt(y);
+                GroupCollection? groups = SimpleGrouper.GroupHorizontal(board, y);
+                IRuleLine? ruleLine = board.LeftRules[y];
                 if (groups.ContainsNones && groups.SatisfiesRuleLine(ruleLine))
                 {
                     for (int x = 0; x < board.Width; x++)
                     {
-                        var state = board[x, y];
+                        CellState state = board[x, y];
                         if (state == CellState.None)
                         {
                             changes.Add(BoardChange.Blocked(x,y));

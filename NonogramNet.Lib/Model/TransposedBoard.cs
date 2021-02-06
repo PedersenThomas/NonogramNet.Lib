@@ -10,12 +10,15 @@ namespace NonogramNet.Lib.Model
 
         public TransposedBoard(IBoard board)
         {
-            _board = board;
+            this._board = board;
         }
 
-        public RulesMatrix TopRules => this._board.LeftRules;
-        public RulesMatrix LeftRules => this._board.TopRules;
+        public IRulesMatrix TopRules => this._board.LeftRules;
+
+        public IRulesMatrix LeftRules => this._board.TopRules;
+
         public int Width => this._board.Height;
+
         public int Height => this._board.Width;
 
         public CellState this[int x, int y] => this._board[y, x];

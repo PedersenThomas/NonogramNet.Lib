@@ -4,9 +4,9 @@
 
     public interface IBoard
     {
-        public RulesMatrix TopRules { get; }
+        public IRulesMatrix TopRules { get; }
 
-        public RulesMatrix LeftRules { get; }
+        public IRulesMatrix LeftRules { get; }
         public int Width { get; }
 
         public int Height { get; }

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace NonogramNet.Lib.Model
+﻿namespace NonogramNet.Lib.Model
 {
+    using System;
+
     public readonly struct BoardChange : IEquatable<BoardChange>
     {
         public int X { get; }
@@ -30,6 +28,11 @@ namespace NonogramNet.Lib.Model
             return new BoardChange(this.Y, this.X, this.NewValue);
         }
 
+        public BoardChange Flipped(int width, int height)
+        {
+            return new BoardChange(width - this.X - 1, height - this.Y - 1, this.NewValue);
+        }
+
         public override string ToString()
         {
             return $"({this.X},{this.Y}) -> {this.NewValue}";
@@ -37,23 +40,17 @@ namespace NonogramNet.Lib.Model
 
         public bool Equals(BoardChange other)
         {
-            return X == other.X && Y == other.Y && NewValue == other.NewValue;
+            return this.X == other.X && this.Y == other.Y && this.NewValue == other.NewValue;
         }
 
         public override bool Equals(object? obj)
         {
-            return obj is BoardChange other && Equals(other);
+            return obj is BoardChange other && this.Equals(other);
         }
 
         public override int GetHashCode()
         {
-            unchecked
-            {
-                var hashCode = X;
-                hashCode = (hashCode * 397) ^ Y;
-                hashCode = (hashCode * 397) ^ (int) NewValue;
-                return hashCode;
-            }
+            return HashCode.Combine(this.X, this.Y, this.NewValue);
         }
 
         public static bool operator ==(BoardChange left, BoardChange right)

@@ -6,50 +6,51 @@
 
     public class Board : IBoard
     {
-        private Board(RulesMatrix topRules, RulesMatrix leftRules)
+        private Board(IRulesMatrix topRules, IRulesMatrix leftRules)
         {
-            TopRules = topRules;
-            LeftRules = leftRules;
-            matrix = new CellState[topRules.NumberOfRules, leftRules.NumberOfRules];
+            this.TopRules = topRules;
+            this.LeftRules = leftRules;
+            this.Matrix = new CellState[topRules.NumberOfRules, leftRules.NumberOfRules];
         }
 
-        private Board(RulesMatrix topRules, RulesMatrix leftRules, CellState[,] matrix)
+        private Board(IRulesMatrix topRules, IRulesMatrix leftRules, CellState[,] matrix)
         {
-            TopRules = topRules;
-            LeftRules = leftRules;
-            this.matrix = matrix;
+            this.TopRules = topRules;
+            this.LeftRules = leftRules;
+            this.Matrix = matrix;
         }
 
-        private CellState[,] matrix { get; }
-        public RulesMatrix TopRules { get; }
+        private CellState[,] Matrix { get; }
 
-        public RulesMatrix LeftRules { get; }
+        public IRulesMatrix TopRules { get; }
 
-        public int Width => matrix.GetLength(0);
+        public IRulesMatrix LeftRules { get; }
 
-        public int Height => matrix.GetLength(1);
+        public int Width => this.Matrix.GetLength(0);
 
-        public CellState this[int x, int y] => matrix[x, y];
+        public int Height => this.Matrix.GetLength(1);
+
+        public CellState this[int x, int y] => this.Matrix[x, y];
 
         public IBoard ApplyChange(BoardChange change)
         {
             // Check if no change is about to happen. In that case just return the same board since it is immutable.
-            if (matrix[change.X, change.Y] == change.NewValue)
+            if (this.Matrix[change.X, change.Y] == change.NewValue)
             {
                 return this;
             }
 
-            var newMatrix = CloneMatrix(matrix);
+            CellState[,]? newMatrix = CloneMatrix(this.Matrix);
             newMatrix[change.X, change.Y] = change.NewValue;
 
-            return new Board(TopRules, LeftRules, newMatrix);
+            return new Board(this.TopRules, this.LeftRules, newMatrix);
         }
 
         public IBoard ApplyChanges(IEnumerable<BoardChange> changes)
         {
-            var newMatrix = matrix;
-            var isCloned = false;
-            foreach (var change in changes)
+            CellState[,]? newMatrix = this.Matrix;
+            bool isCloned = false;
+            foreach (BoardChange change in changes)
             {
                 if (newMatrix[change.X, change.Y] == change.NewValue)
                 {
@@ -58,21 +59,21 @@
 
                 if (!isCloned)
                 {
-                    newMatrix = CloneMatrix(matrix);
+                    newMatrix = CloneMatrix(this.Matrix);
                     isCloned = true;
                 }
 
                 newMatrix[change.X, change.Y] = change.NewValue;
             }
 
-            return isCloned ? new Board(TopRules, LeftRules, newMatrix) : this;
+            return isCloned ? new Board(this.TopRules, this.LeftRules, newMatrix) : this;
         }
 
         public IBoard ApplyChanges(params BoardChange[] changes)
         {
-            var newMatrix = matrix;
-            var isCloned = false;
-            foreach (var change in changes)
+            CellState[,]? newMatrix = this.Matrix;
+            bool isCloned = false;
+            foreach (BoardChange change in changes)
             {
                 if (newMatrix[change.X, change.Y] == change.NewValue)
                 {
@@ -81,14 +82,14 @@
 
                 if (!isCloned)
                 {
-                    newMatrix = CloneMatrix(matrix);
+                    newMatrix = CloneMatrix(this.Matrix);
                     isCloned = true;
                 }
 
                 newMatrix[change.X, change.Y] = change.NewValue;
             }
 
-            return isCloned ? new Board(TopRules, LeftRules, newMatrix) : this;
+            return isCloned ? new Board(this.TopRules, this.LeftRules, newMatrix) : this;
         }
 
         public static Board MakeBoard(RulesMatrix topRules, RulesMatrix leftRules)
@@ -130,17 +131,17 @@
                     $"The number of LeftRules doesn't match the dimension of the matrix. LeftRules: {leftRules.NumberOfRules} <> Matrix: {matrix.GetLength(0)}");
             }
 
-            var newMatrix = CloneMatrix(matrix);
+            CellState[,]? newMatrix = CloneMatrix(matrix);
 
             return new Board(topRules, leftRules, newMatrix);
         }
 
         private static CellState[,] CloneMatrix(CellState[,] oldMatrix)
         {
-            var newMatrix = new CellState[oldMatrix.GetLength(0), oldMatrix.GetLength(1)];
-            for (var y = 0; y < oldMatrix.GetLength(1); y++)
+            CellState[,]? newMatrix = new CellState[oldMatrix.GetLength(0), oldMatrix.GetLength(1)];
+            for (int y = 0; y < oldMatrix.GetLength(1); y++)
             {
-                for (var x = 0; x < oldMatrix.GetLength(0); x++)
+                for (int x = 0; x < oldMatrix.GetLength(0); x++)
                 {
                     newMatrix[x, y] = oldMatrix[x, y];
                 }
