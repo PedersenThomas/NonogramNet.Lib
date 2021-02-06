@@ -9,5 +9,7 @@
         public int NumberOfRules { get; }
 
         public int this[int x, int y] { get; }
+
+        public IRuleLine this[int x] { get; }
     }
 }

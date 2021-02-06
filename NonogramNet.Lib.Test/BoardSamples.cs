@@ -168,5 +168,27 @@ namespace NonogramNet.Lib.Test
                 new List<int> {1},
                 new List<int> {1}})
             );
+
+        /* ____X
+         * ____X
+         * _____
+         * _____
+         * XX___
+         * 
+         */
+        public static IBoard Board7_ManualFlipped = Board.MakeBoard(
+            RulesMatrix.MakeRulesMatrix(new List<List<int>> {
+                new List<int> {1},
+                new List<int> {1},
+                new List<int> {},
+                new List<int> {},
+                new List<int> {2}}),
+            RulesMatrix.MakeRulesMatrix(new List<List<int>> {
+                new List<int> {1},
+                new List<int> {1},
+                new List<int> {},
+                new List<int> {},
+                new List<int> {2}})
+            );
     }
 }

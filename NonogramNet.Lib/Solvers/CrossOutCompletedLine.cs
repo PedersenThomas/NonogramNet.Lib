@@ -23,7 +23,7 @@ namespace NonogramNet.Lib.Solvers
             for (int x = 0; x < board.Width; x++)
             {
                 GroupCollection? groups = SimpleGrouper.GroupVertical(board, x);
-                IRuleLine? ruleLine = board.TopRules.GetRuleLineAt(x);
+                IRuleLine? ruleLine = board.TopRules[x];
                 if (groups.ContainsNones && groups.SatisfiesRuleLine(ruleLine))
                 {
                     for (int y = 0; y < board.Height; y++)
@@ -43,7 +43,7 @@ namespace NonogramNet.Lib.Solvers
             for (int y = 0; y < board.Height; y++)
             {
                 GroupCollection? groups = SimpleGrouper.GroupHorizontal(board, y);
-                IRuleLine? ruleLine = board.LeftRules.GetRuleLineAt(y);
+                IRuleLine? ruleLine = board.LeftRules[y];
                 if (groups.ContainsNones && groups.SatisfiesRuleLine(ruleLine))
                 {
                     for (int x = 0; x < board.Width; x++)

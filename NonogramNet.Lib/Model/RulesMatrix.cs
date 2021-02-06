@@ -43,14 +43,9 @@ namespace NonogramNet.Lib.Model
             return new RulesMatrix(newRules);
         }
 
-        public IRuleLine this[int x] => this.GetRuleLineAt(x);
+        public IRuleLine this[int x] => this.Rules[x];
 
         public int this[int x, int y] => this.Rules[x][y];
-
-        public IRuleLine GetRuleLineAt(int index)
-        {
-            return this.Rules[index];
-        }
 
         public IEnumerator<IRuleLine> GetEnumerator()
         {

@@ -50,5 +50,39 @@ namespace NonogramNet.Lib.Test.Solvers
             };
             Assert.Equal(expected, actualChanges);
         }
+
+        [Fact]
+        public void BoardWithTwoToFillVertical_Flipped_MarkOneAsBlocked()
+        {
+            var board = BoardSamples.Board7_ManualFlipped
+                .ApplyChanges(
+                    BoardChange.Blocked(4, 3)
+                );
+            var solver = new FirstGroupTooSmall();
+
+            var actualChanges = solver.Solve(board);
+            var expected = new List<BoardChange>
+            {
+                BoardChange.Blocked(4,4)
+            };
+            Assert.Equal(expected, actualChanges);
+        }
+
+        [Fact]
+        public void BoardWithTwoToFillHorizontal_Flipped_MarkOneAsBlocked()
+        {
+            var board = BoardSamples.Board7_ManualFlipped
+                .ApplyChanges(
+                    BoardChange.Blocked(3, 4)
+                );
+            var solver = new FirstGroupTooSmall();
+
+            var actualChanges = solver.Solve(board);
+            var expected = new List<BoardChange>
+            {
+                BoardChange.Blocked(4,4)
+            };
+            Assert.Equal(expected, actualChanges);
+        }
     }
 }

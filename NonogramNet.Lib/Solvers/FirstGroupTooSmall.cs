@@ -11,13 +11,30 @@ namespace NonogramNet.Lib.Solvers
         // TODO: Implement FlippedBoard or make it work from the other end as well
         public IEnumerable<BoardChange> Solve(IBoard board)
         {
-            var changes = new HashSet<BoardChange>();
-            VerticalCheck(board, changes);
-            var transposedChanges = new HashSet<BoardChange>();
-            VerticalCheck(new TransposedBoard(board), transposedChanges);
+            HashSet<BoardChange>? changes = new HashSet<BoardChange>();
+            this.VerticalCheck(board, changes);
+            HashSet<BoardChange>? transposedChanges = new HashSet<BoardChange>();
+            TransposedBoard? transposedBoard = new TransposedBoard(board);
+            this.VerticalCheck(transposedBoard, transposedChanges);
             if (transposedChanges.Count > 0)
             {
                 changes.Add(transposedChanges.Transpose());
+            }
+
+            HashSet<BoardChange>? flippedChanges = new HashSet<BoardChange>();
+            FlippedBoard? flippedBoard = new FlippedBoard(board);
+            this.VerticalCheck(flippedBoard, flippedChanges);
+            if(flippedChanges.Count > 0)
+            {
+                changes.Add(flippedChanges.Flip(board.Width, board.Height));
+            }
+
+            HashSet<BoardChange>? flippedTransposedChanges = new HashSet<BoardChange>();
+            FlippedBoard? flippedTransposedBoard = new FlippedBoard(transposedBoard);
+            this.VerticalCheck(flippedTransposedBoard, flippedTransposedChanges);
+            if (flippedTransposedChanges.Count > 0)
+            {
+                changes.Add(flippedTransposedChanges.Flip(board.Width, board.Height).Transpose());
             }
 
             return changes;
@@ -29,13 +46,13 @@ namespace NonogramNet.Lib.Solvers
             for (int x = 0; x < board.Width; x++)
             {
                 lineIsCompleted = false;
-                var ruleLine = board.TopRules[x];
-                var firstRule = ruleLine?.FirstOrDefault();
+                IRuleLine? ruleLine = board.TopRules[x];
+                int? firstRule = ruleLine?.FirstOrDefault();
                 if(firstRule == null)
                 {
                     continue;
                 }
-                var groups = SimpleGrouper.GroupVertical(board, x);
+                GroupCollection? groups = SimpleGrouper.GroupVertical(board, x);
                 if (groups == null)
                 {
                     continue;
