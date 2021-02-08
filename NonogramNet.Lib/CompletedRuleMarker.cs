@@ -2,7 +2,7 @@
 
 namespace NonogramNet.Lib
 {
-    public class CompletedRuleMarker : IEquatable<CompletedRuleMarker>
+    public class CompletedRuleMarker : IEquatable<CompletedRuleMarker>, IComparable<CompletedRuleMarker>
     {
         public CompletedRuleMarker(int ruleIndex, int startIndex)
         {
@@ -12,6 +12,11 @@ namespace NonogramNet.Lib
 
         public int RuleIndex { get; set; }
         public int StartIndex { get; set; }
+
+        public int CompareTo(CompletedRuleMarker other)
+        {
+            return this.RuleIndex.CompareTo(other.RuleIndex);
+        }
 
         public bool Equals(CompletedRuleMarker other)
         {
