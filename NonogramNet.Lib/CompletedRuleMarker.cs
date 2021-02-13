@@ -10,8 +10,8 @@ namespace NonogramNet.Lib
             this.StartIndex = startIndex;
         }
 
-        public int RuleIndex { get; set; }
-        public int StartIndex { get; set; }
+        public int RuleIndex { get; }
+        public int StartIndex { get; }
 
         public int CompareTo(CompletedRuleMarker other)
         {

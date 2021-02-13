@@ -12,13 +12,13 @@ namespace NonogramNet.Lib
     {
         public CompletedBoardRules CalculateForBoard(IBoard board)
         {
-            var topCompleted = CalculateVerticleMarker(board);
-            var leftCompleted = CalculateVerticleMarker(new TransposedBoard(board));
+            var topCompleted = this.CalculateVerticalMarker(board);
+            var leftCompleted = this.CalculateVerticalMarker(new TransposedBoard(board));
 
             return new CompletedBoardRules(topCompleted, leftCompleted);
         }
 
-        private List<List<CompletedRuleMarker>> CalculateVerticleMarker(IBoard board)
+        private List<List<CompletedRuleMarker>> CalculateVerticalMarker(IBoard board)
         {
             var resultMatrix = new List<List<CompletedRuleMarker>>();
 
@@ -42,6 +42,7 @@ namespace NonogramNet.Lib
                     continue;
                 }
 
+                // Going from top to bottom.
                 foreach (var group in verticalGroup.Groups)
                 {
                     switch (group.State)
@@ -72,6 +73,7 @@ namespace NonogramNet.Lib
                     }
                 }
 
+                // Going bottom-up
                 lineIsCompleted = false;
                 currentRuleIndex = rulesLine.Count - 1;
                 foreach (var group in ((IEnumerable<Group>)verticalGroup.Groups).Reverse())
@@ -104,7 +106,11 @@ namespace NonogramNet.Lib
                         break;
                     }
                 }
-                markerList.Sort();
+
+                if (markersNeedSorting)
+                {
+                    markerList.Sort();
+                }
             }
 
             return resultMatrix;

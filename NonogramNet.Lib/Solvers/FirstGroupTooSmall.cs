@@ -18,7 +18,7 @@ namespace NonogramNet.Lib.Solvers
             this.VerticalCheck(transposedBoard, transposedChanges);
             if (transposedChanges.Count > 0)
             {
-                changes.Add(transposedChanges.Transpose());
+                changes.UnionWith(transposedChanges.Transpose());
             }
 
             HashSet<BoardChange>? flippedChanges = new HashSet<BoardChange>();
@@ -26,7 +26,7 @@ namespace NonogramNet.Lib.Solvers
             this.VerticalCheck(flippedBoard, flippedChanges);
             if(flippedChanges.Count > 0)
             {
-                changes.Add(flippedChanges.Flip(board.Width, board.Height));
+                changes.UnionWith(flippedChanges.Flip(board.Width, board.Height));
             }
 
             HashSet<BoardChange>? flippedTransposedChanges = new HashSet<BoardChange>();
@@ -34,7 +34,7 @@ namespace NonogramNet.Lib.Solvers
             this.VerticalCheck(flippedTransposedBoard, flippedTransposedChanges);
             if (flippedTransposedChanges.Count > 0)
             {
-                changes.Add(flippedTransposedChanges.Flip(board.Width, board.Height).Transpose());
+                changes.UnionWith(flippedTransposedChanges.Flip(board.Width, board.Height).Transpose());
             }
 
             return changes;

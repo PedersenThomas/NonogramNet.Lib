@@ -6,6 +6,8 @@ namespace NonogramNet.Lib.Test
 {
     public class CompletedRulesTest
     {
+        private static readonly List<CompletedRuleMarker> EmptyMarkerList = new List<CompletedRuleMarker>();
+
         [Fact]
         public void OneRuleOnTheLineTest()
         {
@@ -18,20 +20,20 @@ namespace NonogramNet.Lib.Test
             var actualCompletedRules = calculator.CalculateForBoard(board);
             var expected = new CompletedBoardRules(
                 new List<List<CompletedRuleMarker>> {
-                    new List<CompletedRuleMarker>{ },
-                    new List<CompletedRuleMarker>{ },
+                    EmptyMarkerList,
+                    EmptyMarkerList,
                     new List<CompletedRuleMarker>{ new CompletedRuleMarker(0, 0) }
                 },
                 new List<List<CompletedRuleMarker>> {
                     new List<CompletedRuleMarker>{ new CompletedRuleMarker(0, 1) },
-                    new List<CompletedRuleMarker>{ },
-                    new List<CompletedRuleMarker>{ }
+                    EmptyMarkerList,
+                    EmptyMarkerList
                 });
             Assert.Equal(expected, actualCompletedRules);
         }
 
         [Fact]
-        public void LineIsCompletButWithEmptySpace()
+        public void LineIsCompleteButWithEmptySpace()
         {
             var board = BoardSamples.Board1
                 .ApplyChanges(
@@ -43,18 +45,18 @@ namespace NonogramNet.Lib.Test
             var actualCompletedRules = calculator.CalculateForBoard(board);
             var expected = new CompletedBoardRules(
                 new List<List<CompletedRuleMarker>> {
-                    new List<CompletedRuleMarker>{ },
-                    new List<CompletedRuleMarker>{ },
-                    new List<CompletedRuleMarker>{ },
-                    new List<CompletedRuleMarker>{ },
-                    new List<CompletedRuleMarker>{ }
+                    EmptyMarkerList,
+                    EmptyMarkerList,
+                    EmptyMarkerList,
+                    EmptyMarkerList,
+                    EmptyMarkerList
                 },
                 new List<List<CompletedRuleMarker>> {
-                    new List<CompletedRuleMarker>{ },
-                    new List<CompletedRuleMarker>{ },
+                    EmptyMarkerList,
+                    EmptyMarkerList,
                     new List<CompletedRuleMarker>{ new CompletedRuleMarker(0,0), new CompletedRuleMarker(1,2), new CompletedRuleMarker(2,4) },
-                    new List<CompletedRuleMarker>{ },
-                    new List<CompletedRuleMarker>{ }
+                    EmptyMarkerList,
+                    EmptyMarkerList
                 });
             Assert.Equal(expected, actualCompletedRules);
         }
@@ -71,21 +73,20 @@ namespace NonogramNet.Lib.Test
             var actualCompletedRules = calculator.CalculateForBoard(board);
             var expected = new CompletedBoardRules(
                 new List<List<CompletedRuleMarker>> {
-                    new List<CompletedRuleMarker>{ },
-                    new List<CompletedRuleMarker>{ },
-                    new List<CompletedRuleMarker>{ },
-                    new List<CompletedRuleMarker>{ },
-                    new List<CompletedRuleMarker>{ }
+                    EmptyMarkerList,
+                    EmptyMarkerList,
+                    EmptyMarkerList,
+                    EmptyMarkerList,
+                    EmptyMarkerList
                 },
                 new List<List<CompletedRuleMarker>> {
-                    new List<CompletedRuleMarker>{ },
-                    new List<CompletedRuleMarker>{ },
+                    EmptyMarkerList,
+                    EmptyMarkerList,
                     new List<CompletedRuleMarker>{ new CompletedRuleMarker(0,0), new CompletedRuleMarker(2,4) },
-                    new List<CompletedRuleMarker>{ },
-                    new List<CompletedRuleMarker>{ }
+                    EmptyMarkerList,
+                    EmptyMarkerList
                 });
             Assert.Equal(expected, actualCompletedRules);
         }
-
     }
 }
