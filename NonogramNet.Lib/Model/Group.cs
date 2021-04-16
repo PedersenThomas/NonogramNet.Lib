@@ -1,5 +1,8 @@
 namespace NonogramNet.Lib.Model
 {
+    using System.Diagnostics;
+
+    [DebuggerDisplay("Index:{StartIndex} Count:{Count}, State:{State}")]
     public struct Group
     {
         public CellState State { get; set; }

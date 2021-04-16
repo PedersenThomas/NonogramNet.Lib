@@ -39,6 +39,7 @@ namespace NonogramNet.Lib
                         markerList.Add(new CompletedRuleMarker(currentRuleIndex, group.StartIndex));
                         currentRuleIndex += 1;
                     }
+                    // Every rule in the line is completed, so continue to the next.
                     continue;
                 }
 
@@ -48,7 +49,7 @@ namespace NonogramNet.Lib
                     switch (group.State)
                     {
                         case CellState.None:
-                            //TODO We can do better, but I can't now at midnight.
+                            // TODO, even though a "None" is found, it is possible in some cases to find rules that with certainty can be marked as satisfied.
                             lineIsCompleted = true;
                             break;
                         case CellState.Filled:
@@ -81,7 +82,7 @@ namespace NonogramNet.Lib
                     switch (group.State)
                     {
                         case CellState.None:
-                            //TODO We can do better, but I can't now at midnight.
+                            // TODO, even though a "None" is found, it is possible in some cases to find rules that with certainty can be marked as satisfied.
                             lineIsCompleted = true;
                             break;
                         case CellState.Filled:
