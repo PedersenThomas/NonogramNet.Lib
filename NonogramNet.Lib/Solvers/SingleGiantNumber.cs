@@ -15,7 +15,7 @@ namespace NonogramNet.Lib.Solvers
             this.Vertical(new TransposedBoard(board), transposedChanges);
             if (transposedChanges.Count > 0)
             {
-                changes.Add(transposedChanges.Transpose());
+                changes.UnionWith(transposedChanges.Transpose());
             }
 
             return changes;
