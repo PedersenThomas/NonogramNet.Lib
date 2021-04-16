@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NonogramNet.Lib.Model;
-
-namespace NonogramNet.Lib
+﻿namespace NonogramNet.Lib
 {
-    /* Given a Board, it calculates, which rules are certainly completed.
-     */
+    using System.Collections.Generic;
+    using System.Linq;
+    using Model;
+
+    /// <summary>
+    /// Given a Board, it calculates, which rules are certainly completed.
+    /// </summary>
     public class CompletedRulesCalculator
     {
         public CompletedBoardRules CalculateForBoard(IBoard board)
